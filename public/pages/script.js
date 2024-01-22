@@ -1,6 +1,6 @@
 async function log() {
-    let username = document.getElementById('typeUserX').value;
-    let password = document.getElementById('typePasswordX').value;
+    let username = document.getElementById('typeUsernameX-2').value;
+    let password = document.getElementById('typePasswordX-2').value;
     let url = `/api/log?username=${username}&password=${password}`;
     await fetch(url)
         .then(data => data.json())
