@@ -13,9 +13,15 @@ app.post('/api/authorize', async (req, res) => {
     const username = req.query.username;
     const password = req.query.password;
     if(username === 'test' && password === 'test') {
-        await fs.readFile('./nonpublic/privacy.html', 'utf-8', (err, data) => {
+        await fs.readFile('./nonpublic/Start.html', 'utf-8', (err, data) => {
             if(err) res.send('');
             countOfPlayer++;
+            res.send(data);
+        });
+    }
+    if(username === 'root' && password === 'root') {
+        await fs.readFile('./nonpublic/panel.html', 'utf-8', (err, data) => {
+            if(err) res.send('');
             res.send(data);
         });
     }
@@ -36,6 +42,14 @@ app.post('/sudo/addQuest', (req, res) => {
     const quest = req.query.question;
     session.addQuestion(quest);
     res.send('uploaded');
+});
+
+app.get('/api/getQuest', (req, res) => {
+    res.send(session.getLastQuestion());
+});
+
+app.get('/sudo/player', (req, res) => {
+    res.send(res.json(countOfPlayer));
 });
 
 app.get('/api/isready', (req, res) => {

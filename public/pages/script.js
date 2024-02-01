@@ -18,7 +18,12 @@ function Login() {
         .then(response => response.text())
         .then(response => {
             document.getElementById('content').innerHTML = response;
-        })
+            if(response.includes('Key')) {
+                GetPeople();
+            } else {
+                GetLastQuest();
+            }
+        });
 }
 function Input(text) {
     fetch(`/api/input?input=${text}`, {
@@ -36,6 +41,36 @@ function Next() {
         .then(response => {
             if(response !== 'Wait') {
                 document.getElementById('content').innerHTML = response;
+                GetLastQuest();
             }
+        });
+}
+
+function AddQuestion() {
+    const quest = document.getElementById('question').value;
+    fetch(`/sudo/addQuest?question=${quest}` , {
+        method: 'POST'
+    });
+}
+
+function Restart() {
+    fetch('/sudo/start', {
+        method: 'POST'
+    });
+}
+
+function GetLastQuest() {
+    fetch('/api/getQuest')
+        .then(response => response.text())
+        .then(response => {
+            document.getElementById('title').innerHTML = response;
+        });
+}
+
+function GetPeople() {
+    fetch('/sudo/player')
+        .then(response => response.text())
+        .then(response => {
+            document.getElementById('count').innerHTML = response;
         });
 }

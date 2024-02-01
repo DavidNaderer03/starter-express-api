@@ -1,10 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+<div>
+    <div class="row">
+        <div class="col">
+            <div class="container-fluid m-lg-5">
+                <label for="question" class="form-label">Question</label>
+                <input type="password" id="question" class="form-control" aria-describedby="passwordHelpBlock">
+                <div id="passwordHelpBlock" class="form-text">
+                    Enter a question
+                </div>
+                <button class="btn btn-primary" onclick="AddQuestion()"></button>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table-hover table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Key</th>
+                                <th>Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Count of people</td>
+                                <td id="count"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button class="btn btn-primary" onclick="Restart()">Start</button>
+                    <button class="btn btn-primary" onclick="">Reload</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

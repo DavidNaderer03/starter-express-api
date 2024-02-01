@@ -4,23 +4,30 @@ const WriteInFile = require('../files/writeIn');
 class Session {
     constructor() {
         this.allQuestions = [];
+        this.isRunning = false;
     }
 
     addQuestion(question) {
-        if (this.allQuestions.length !== 0) {
-            const index = this.allQuestions.length - 1;
-            const message = this.allQuestions[index].Quest + '?  Ja:' + this.allQuestions[index].yes + '  Nein:' + this.allQuestions[index].no + '\n';
-            WriteInFile.WriteInFile(message);
-        }
+        this.save();
         const quest = new Questions(question);
         this.playerMadeQuestion = 0;
         this.allQuestions.push(quest);
     }
 
     restart(countPlayer) {
-        this.allQuestions = [];
+        this.isRunning = true;
         this.countPlayer = countPlayer;
         this.playerMadeQuestion = 0;
+    }
+
+    close() {
+        this.save();
+        this.isRunning = false;
+    }
+
+    startIntro() {
+        this.allQuestions = [];
+        this.isRunning = true;
     }
 
     add(input) {
@@ -30,6 +37,21 @@ class Session {
 
     everyoneIsReady() {
         return this.countPlayer === this.playerMadeQuestion;
+    }
+
+    getLastQuestion() {
+        const index = this.allQuestions.length - 1;
+        if(index < 0)
+            return '';
+        return this.allQuestions[index].Quest;
+    }
+
+    save() {
+        if (this.allQuestions.length !== 0) {
+            const index = this.allQuestions.length - 1;
+            const message = this.allQuestions[index].Quest + '?  Ja:' + this.allQuestions[index].yes + '  Nein:' + this.allQuestions[index].no + '\n';
+            WriteInFile.WriteInFile(message);
+        }
     }
 }
 
