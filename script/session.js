@@ -39,6 +39,10 @@ class Session {
         return this.countPlayer === this.playerMadeQuestion;
     }
 
+    startCheck() {
+        return this.isRunning === 2;
+    }
+
     getLastQuestion() {
         const index = this.allQuestions.length - 1;
         if(index < 0)
